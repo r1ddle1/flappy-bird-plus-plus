@@ -46,7 +46,7 @@ position = Vector2( 1014.26, 128.145 )
 shape = SubResource( 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
-[connection signal="hit" from="Bird" to="." method="_on_Bird_hit"]
 [connection signal="hit" from="Bird" to="HUD" method="_on_Bird_hit"]
+[connection signal="hit" from="Bird" to="." method="_on_Bird_hit"]
 [connection signal="restart_game" from="Bird" to="." method="_restart_game"]
 [connection signal="timeout" from="ColumnSpawnTimer" to="." method="_on_ColumnSpawnTimer_timeout"]

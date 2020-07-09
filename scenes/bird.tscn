@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://sprites/birds/gabe_dead.png" type="Texture" id=1]
 [ext_resource path="res://sprites/birds/gabe_head.png" type="Texture" id=2]
 [ext_resource path="res://scripts/bird.gd" type="Script" id=3]
+[ext_resource path="res://sounds/flap.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/die.wav" type="AudioStream" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,6 +23,8 @@ animations = [ {
 position = Vector2( 205.271, 117.8 )
 gravity_scale = 5.0
 script = ExtResource( 3 )
+flap_sound = ExtResource( 4 )
+die_sound = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -6.83613, -6.59474 )
@@ -34,3 +38,5 @@ animation = "alive"
 position = Vector2( -7.14888, -7.26786 )
 scale = Vector2( 0.858969, 0.858969 )
 polygon = PoolVector2Array( 17.6397, 36.2395, 22.651, 31.6736, 26.9941, 27.9986, 41.0258, 24.9919, 42.2508, 16.1942, 41.5826, 7.28525, 36.2372, -4.63052, 26.5164, -28.1322, 14.0677, -40.9135, 1.75145, -43.5622, -10.9109, -40.2018, -21.444, -31.5953, -29.7746, -23.7548, -34.8, -13.1673, -39.1703, -3.76453, -42.8784, 6.56523, -41.6865, 13.3193, -39.8325, 23.6491, -32.946, 27.4896, -27.3838, 29.0788, -24.2054, 27.3572, -19.7027, 32.4482, -14.9351, 36.1563, -10.2999, 39.2022, -6.85669, 41.586, -3.41344, 42.9104, 0.824417, 42.9104, 6.3866, 43.3076, 9.43256, 42.7779, 13.6704, 39.8644 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

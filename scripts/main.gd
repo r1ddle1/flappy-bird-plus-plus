@@ -30,9 +30,9 @@ func _on_ColumnSpawnTimer_timeout():
 
 	spawned_column_count += 1
 	var column_instance = column.instance()
-	var y_spawn_pos = rand_range(GameVariables.column_spawn_min_y_pos, 
-			GameVariables.column_spawn_max_y_pos)
-	column_instance.position = Vector2(GameVariables.column_spawn_x_pos,
+	var y_spawn_pos = rand_range(GameVariables.COLUMN_SPAWN_MIN_Y_POS, 
+		GameVariables.COLUMN_SPAWN_MAX_Y_POS)
+	column_instance.position = Vector2(GameVariables.COLUMN_SPAWN_X_POS,
 		y_spawn_pos)
 
 	# Connect each column's scored signal to _on_scored
