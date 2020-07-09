@@ -10,6 +10,8 @@ func _ready():
 	randomize()
 	_load_game_data()
 	$ColumnSpawnTimer.set("wait_time", GameVariables.column_spawn_delay)
+	GameVariables.score = 0
+	$HUD.update_text()
 
 func _process(delta):
 	pass
@@ -17,6 +19,8 @@ func _process(delta):
 
 func _on_Bird_hit():
 	GameVariables.scroll_speed = 0
+	if GameVariables.score > GameVariables.high_score:
+		GameVariables.high_score = GameVariables.score
 
 
 func _on_ColumnSpawnTimer_timeout():
@@ -52,17 +56,18 @@ func _load_game_data():
 	var res = config.load_encrypted_pass('data.enc', GameVariables.CONFIG_KEY)
 	if res != OK:  # Config doesn't exist yet
 		return
-	GameVariables.score = config.get_value('GameVariables', 'score', 0)
-	GameVariables.money = config.get_value('GameVariables', 'money', 0)
+
+	GameVariables.high_score = config.get_value('GameVariables', 'high_score')
+	GameVariables.money = config.get_value('GameVariables', 'money')
+	# Don't forget to update text!
 	$HUD.update_text()
 
 func _save_game_data():
 	var config = ConfigFile.new()
 	
-	config.set_value('GameVariables', 'score', GameVariables.score)
+	config.set_value('GameVariables', 'high_score', GameVariables.high_score)
 	config.set_value('GameVariables', 'money', GameVariables.money)
 	
-	var res = config.save_encrypted_pass('data.enc', 
-		GameVariables.CONFIG_KEY)
+	var res = config.save_encrypted_pass('data.enc', GameVariables.CONFIG_KEY)
 	if res != OK:
-		print("Couldn't save game data")
+		print("Error: Couldn't save game data")

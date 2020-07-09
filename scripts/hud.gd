@@ -10,4 +10,5 @@ func update_text():
 
 
 func _on_Bird_hit():
+	$DeadLabel.text = "You're dead!\nHigh score: " + str(GameVariables.high_score)
 	$DeadLabel.show()

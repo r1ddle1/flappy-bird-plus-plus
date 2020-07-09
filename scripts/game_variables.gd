@@ -3,8 +3,9 @@ extends Node
 export (bool) var god_mode = false
 
 export (int) var score = 0
+export (int) var high_score = 0
 export (int) var money = 0
-export (float) var scroll_speed = 0
+export (float) var scroll_speed
 
 
 export (float) var column_spawn_x_pos = 2000
