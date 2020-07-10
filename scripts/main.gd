@@ -7,6 +7,8 @@ var spawned_columns_count = 0
 var spawned_coins_count = 0
 var old_scroll_speed = GameVariables.scroll_speed
 
+export(AudioStream) var coin_collected_sound
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -61,6 +63,8 @@ func _on_scored():
 func _on_coin_collected():
 	GameVariables.money += 1
 	$HUD.update_text()
+	$AudioStreamPlayer2D.stream = coin_collected_sound
+	$AudioStreamPlayer2D.play()
 
 
 func _restart_game():
