@@ -16,7 +16,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_ChangePosTimer_timeout():
-	position.x = GameVariables.column_spawn_x_pos
+	position.x = GameVariables.COLUMN_SPAWN_X_POS
 	position.y = rand_range(GameVariables.COLUMN_SPAWN_MIN_Y_POS, 
 		GameVariables.COLUMN_SPAWN_MAX_Y_POS)
 
