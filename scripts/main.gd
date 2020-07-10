@@ -1,20 +1,21 @@
 extends Node2D
 
 var column = preload("res://scenes/column.tscn")
-var spawned_column_count = 0
+var coin = preload("res://scenes/coin.tscn")
 
+var spawned_columns_count = 0
+var spawned_coins_count = 0
 var old_scroll_speed = GameVariables.scroll_speed
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	_load_game_data()
 	$ColumnSpawnTimer.set("wait_time", GameVariables.column_spawn_delay)
+	$CoinSpawnTimer.set("wait_time", GameVariables.coin_spawn_delay)
 	GameVariables.score = 0
 	$HUD.update_text()
-
-func _process(delta):
-	pass
 
 
 func _on_Bird_hit():
@@ -24,11 +25,11 @@ func _on_Bird_hit():
 
 
 func _on_ColumnSpawnTimer_timeout():
-	if spawned_column_count > GameVariables.column_spawn_count:
+	if spawned_columns_count > GameVariables.column_spawn_count:
 		$ColumnSpawnTimer.stop()
 		return
 
-	spawned_column_count += 1
+	spawned_columns_count += 1
 	var column_instance = column.instance()
 	var y_spawn_pos = rand_range(GameVariables.COLUMN_SPAWN_MIN_Y_POS, 
 		GameVariables.COLUMN_SPAWN_MAX_Y_POS)
@@ -40,8 +41,25 @@ func _on_ColumnSpawnTimer_timeout():
 	add_child(column_instance)
 
 
+func _on_CoinSpawnTimer_timeout():
+	var coin_instance = coin.instance()
+	var y_spawn_pos = rand_range(GameVariables.COLUMN_SPAWN_MIN_Y_POS, 
+		GameVariables.COLUMN_SPAWN_MAX_Y_POS)
+	coin_instance.position = Vector2(GameVariables.COLUMN_SPAWN_X_POS,
+		y_spawn_pos)
+
+	# Connect each column's scored signal to _on_scored
+	coin_instance.connect("coin_collected", self, "_on_coin_collected")
+	add_child(coin_instance)
+
+
 func _on_scored():
 	GameVariables.score += 1
+	$HUD.update_text()
+
+
+func _on_coin_collected():
+	GameVariables.money += 1
 	$HUD.update_text()
 
 
@@ -62,6 +80,7 @@ func _load_game_data():
 	# Don't forget to update text!
 	$HUD.update_text()
 
+
 func _save_game_data():
 	var config = ConfigFile.new()
 	
@@ -71,3 +90,4 @@ func _save_game_data():
 	var res = config.save_encrypted_pass('data.enc', GameVariables.CONFIG_KEY)
 	if res != OK:
 		print("Error: Couldn't save game data")
+

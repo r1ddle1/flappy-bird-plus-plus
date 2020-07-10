@@ -5,4 +5,5 @@
 [node name="GameVariables" type="Node"]
 script = ExtResource( 1 )
 scroll_speed = 200.0
+coin_spawn_delay = 20.0
 column_spawn_count = 3

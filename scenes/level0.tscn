@@ -29,9 +29,6 @@ collision_layer = 2147483649
 contacts_reported = 1
 contact_monitor = true
 
-[node name="ColumnSpawnTimer" type="Timer" parent="."]
-autostart = true
-
 [node name="Ground" type="KinematicBody2D" parent="."]
 position = Vector2( 1023.43, 605.108 )
 z_index = 1
@@ -55,7 +52,14 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 2 )
+
+[node name="ColumnSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="CoinSpawnTimer" type="Timer" parent="."]
+autostart = true
 [connection signal="hit" from="Bird" to="HUD" method="_on_Bird_hit"]
 [connection signal="hit" from="Bird" to="." method="_on_Bird_hit"]
 [connection signal="restart_game" from="Bird" to="." method="_restart_game"]
 [connection signal="timeout" from="ColumnSpawnTimer" to="." method="_on_ColumnSpawnTimer_timeout"]
+[connection signal="timeout" from="CoinSpawnTimer" to="." method="_on_CoinSpawnTimer_timeout"]

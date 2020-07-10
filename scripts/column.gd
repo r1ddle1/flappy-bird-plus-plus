@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal scored
 
 func _ready():
-	$ChangePosTimer.set("wait_time", GameVariables.column_spawn_delay - 1)
+	$ChangePosTimer.set("wait_time", GameVariables.column_spawn_delay)
 
 
 func _physics_process(delta):
