@@ -22,4 +22,5 @@ func _on_ChangePosTimer_timeout():
 
 
 func _on_ScoredDetector_body_entered(body):
-	emit_signal("scored")
+	if body.name == 'Bird':
+		emit_signal("scored")
