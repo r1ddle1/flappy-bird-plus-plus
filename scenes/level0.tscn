@@ -30,6 +30,7 @@ position = Vector2( 315.272, 155.964 )
 collision_layer = 2147483649
 contacts_reported = 1
 contact_monitor = true
+jump_force = 250.0
 
 [node name="Ground" type="KinematicBody2D" parent="."]
 position = Vector2( 1023.43, 605.108 )
